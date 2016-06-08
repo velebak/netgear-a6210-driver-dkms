@@ -2,6 +2,17 @@
 # new version (without -$pkgrel): ${2%%-*}
 
 post_install() {
+    echo ">>> Updating module dependencies. Please wait ..."
+    depmod -a ${shell uname -r}
+
+    echo ">>> WARNING: This driver is experimental and some features are missing.   "
+    echo ">>>                                                                       "
+    echo ">>> Known Issues:                                                         "
+    echo ">>>           - Hotspots created with hostapd may fail to start unless an "
+    echo ">>>             initial scan is performed using iw dev IFACE scan.        "
+    echo ">>>           - There has been reports of crashing when a wireless device "
+    echo ">>>             using this drive is unplugged.                            "
+
     dkms install netgear-a6210-driver/${1%%-*}
 }
 
@@ -10,6 +21,9 @@ pre_upgrade() {
 }
 
 post_upgrade() {
+    echo ">>> Updating module dependencies. Please wait ..."
+    depmod -a ${shell uname -r}
+
     post_install ${1%%-*}
 }
 
