@@ -12,7 +12,7 @@ conflicts=("${_pkgbase}")
 conflicts+=("netgear-a6210-kernel-module-git")
 provides+=("$_gitname=$pkgver")
 
-makedepends=('git' 'linux-headers' 'gcc' 'make' 'rsync')
+makedepends=('git' 'linux-headers' 'gcc' 'make')
 source+=("${_gitname:=${pkgname%-git}}::${_giturl:-git+$url}")
 
 # This patch simply allows us to set the installation directory so
