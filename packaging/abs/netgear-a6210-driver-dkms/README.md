@@ -28,6 +28,6 @@ pacman -U netgear-a6210-driver-dkms*.pkg.tar.xz
 
 ### A Note About DKMS
 
-As this package using the [dkms](https://wiki.archlinux.org/index.php/Dynamic_Kernel_Module_Support "DKMS") framework it will automatically compile and install a new driver for your wireless adapter whenever you upgrade/install a 
+As this package uses the [dkms](https://wiki.archlinux.org/index.php/Dynamic_Kernel_Module_Support "DKMS") framework it will automatically compile and install a new driver for your wireless adapter whenever you upgrade/install a 
 new kernel.
 
