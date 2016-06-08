@@ -34,6 +34,19 @@ Now that you have the driver installed you should be able to plug-in your adapat
 ip addr
 ```
 
+If you intend to use this driver to create a wireless hostspot, using something like hostapd, you may need to perform an initial scan before this will work. e.g.
+
+```
+ip link set dev wlan0 up
+iw dev wlan0 scan
+```
+
+Now you can start hostapd
+
+```
+systemctl start hostapd
+```
+
 ### A Note About DKMS
 
 As this package using the [dkms](https://wiki.archlinux.org/index.php/Dynamic_Kernel_Module_Support "DKMS") framework it will automatically compile and install a new driver for your wireless adapter whenever you upgrade/install a 
