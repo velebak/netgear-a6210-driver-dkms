@@ -1,0 +1,79 @@
+_pkgbase="netgear-a6210-driver"
+pkgname="netgear-a6210-driver-dkms"
+pkgver=r443.7c0dee7
+pkgrel=1
+pkgdesc="Kernel driver for the mt766u, mt7632u and mt7612u family of wireless chipsets (DKMS)"
+arch=('x86' 'x86_64') 
+url="https://github.com/worralph/netgear-a6210-driver-dkms"
+_giturl="git+https://github.com/worralph/netgear-a6210-driver-dkms"
+license=('custom')
+depends=('dkms')
+conflicts=("${_pkgbase}")
+conflicts+=("netgear-a6210-kernel-module-git")
+provides+=("$_gitname=$pkgver")
+
+makedepends=('git' 'linux-headers' 'gcc' 'make' 'rsync')
+source+=("${_gitname:=${pkgname%-git}}::${_giturl:-git+$url}")
+
+# This patch simply allows us to set the installation directory so
+# that the module is installed inside the chroot
+source+=("add-destdir-to-makefile.patch")
+
+source+=("dkms.conf")
+source+=("netgear-a6210-driver-dkms.install")
+md5sums=('SKIP'
+         '4877a958c2162c8352e430e01e055607'
+         '228d651cd2a88cf4d0da0d833873abba'
+         'd4c88638680407b0b463c19e78690132')
+
+pkgver() {
+    cd ${_gitname:-$pkgname}
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+    cd ${_gitname:-$pkgname}
+    msg2 "Adding DESTDIR environmental variable to Makefile..."
+    patch -Np1 <../add-destdir-to-makefile.patch
+}
+
+build() {
+    cd "$_gitname"
+    msg2 "Running make clean..."
+    make clean >> /dev/null
+    msg2 "Running make..."
+    make
+}
+
+package() {
+    # Copy dkms.conf
+    msg2 "Copying dkms config..."
+    install -Dm644 dkms.conf "${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/dkms.conf 
+
+    # Set name and version
+    sed -e "s/@_PKGBASE@/${_pkgbase}/" \
+      -e "s/@PKGVER@/${pkgver}/" \
+      -i "${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/dkms.conf
+	   
+    cd "$_gitname"
+
+    # Install the loadable kernel driver
+    make DESTDIR="$pkgdir" RUNDEPMOD=n install
+    mkdir -p $pkgdir/usr
+    msg2 "Moving compiled kernel module from /lib to /usr/lib"
+    mv $pkgdir/lib $pkgdir/usr/
+
+    # Copy the pristine sources (including Makefile) for dkms rebuilding
+    cp -R * "${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/
+    cd "${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/
+    msg2 "Cleaning source tree ready for dkms..."
+    make clean >> /dev/null
+}
+
+post_remove() {
+    depmod -a
+}
+
+post_install() {
+    depmod -a
+}

@@ -1,0 +1,25 @@
+diff --git a/os/linux/Makefile.6 b/os/linux/Makefile.6
+index fb6125e..f959f76 100644
+--- a/os/linux/Makefile.6
++++ b/os/linux/Makefile.6
+@@ -718,12 +718,15 @@ endif
+ endif
+ 
+ install:
+-	rm -rf $(DAT_PATH)
+-	mkdir -pv $(DAT_PATH)
+-	cp $(RT28xx_DIR)/$(DAT_FILE_NAME) $(DAT_PATH)/.
+-	install -d $(LINUX_SRC_MODULE)
+-	install -m 644 -c $(addsuffix .ko,$(MOD_NAME)) $(LINUX_SRC_MODULE)
++	rm -rf $(DESTDIR)$(DAT_PATH)
++	mkdir -pv $(DESTDIR)$(DAT_PATH)
++	cp $(RT28xx_DIR)/$(DAT_FILE_NAME) $(DESTDIR)$(DAT_PATH)/
++	install -d $(LINUX_SRC_MODULE) "$(DESTDIR)$(LINUX_SRC_MODULE)"
++	install -m 644 -c $(addsuffix .ko,$(MOD_NAME)) "$(DESTDIR)$(LINUX_SRC_MODULE)"
++
++ifneq ($(RUNDEPMOD),n)
+ 	/sbin/depmod -a ${shell uname -r}
++endif
+ 
+ uninstall:
+ #	rm -rf $(DAT_PATH)
