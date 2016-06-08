@@ -1,6 +1,6 @@
 # ArchLinux PKGBUILD for the Netgear A6210 Wireless Adapter Linux Kernel Driver (DKMS)
 
-Inside the following directory you will find an ArchLinux compatible PKGBUILD file that can be used to package the A6210 kernel driver for ArchLinux (and potentially other ArchLinux based distributions. e.g. Antergos, Manjaro)
+Inside the following directory you will find an ArchLinux compatible PKGBUILD file that can be used to package the A6210 kernel driver for ArchLinux (and potentially other ArchLinux-based distributions. e.g. Antergos, Manjaro)
 
 ### Creating the netgear-a6210-driver-dkms Package
 
@@ -26,8 +26,16 @@ To install you should run the following as root
 pacman -U netgear-a6210-driver-dkms*.pkg.tar.xz
 ```
 
+### Post-Installation
+
+Now that you have the driver installed you should be able to plug-in your adapater and see that a new wireless interface is available. On my system it is shown as wlan0.
+
+```
+ip addr
+```
+
 ### A Note About DKMS
 
 As this package using the [dkms](https://wiki.archlinux.org/index.php/Dynamic_Kernel_Module_Support "DKMS") framework it will automatically compile and install a new driver for your wireless adapter whenever you upgrade/install a 
-new kernel.
+new linux kernel.
 
