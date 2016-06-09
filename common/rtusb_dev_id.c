@@ -27,12 +27,26 @@
 /* module table */
 USB_DEVICE_ID rtusb_dev_id[] = {
 #ifdef MT76x2
-	{USB_DEVICE(0x0846, 0x9014), .driver_info = RLT_MAC_BASE}, /* Netgear WNDA3100v3 */
+	/* Here we define the USB IDs that the driver will register to handle. To add
+	 * a device which uses a supported chipset you will need to add a new entry 
+	 * into the array below. Note that the first part of the USB ID is specific
+	 * to the vendor of the device whilst the second relates to a given device 
+	 * and product revision. You can find a list of vendor USB IDs on 
+	 * http://www.linux-usb.org/usb.ids
+	 *
+	 * Note that the Netgear N600 WNDA3100 comes in different revisions and only 
+	 * revision 3 uses a chipset that this driver supports. 
+	 *
+	 * WNDA3100v1 – Atheros AR91xx (supported by external driver)
+	 * WNDA3100v2 – Broadcom (Linux support unknown)
+	 * WNDA3100v3 – Mediatek (supported by this driver)
+	 */
 	{USB_DEVICE(0x0B05, 0x180B), .driver_info = RLT_MAC_BASE}, /* ASUS USB-N53 */
-	{USB_DEVICE(0x0846, 0x9053), .driver_info = RLT_MAC_BASE}, /* MT7612U, Netgear A6210 */
 	{USB_DEVICE(0x0B05, 0x17EB), .driver_info = RLT_MAC_BASE}, /* ASUS USB-AC55 */
-	{USB_DEVICE(0x045e, 0x02e6), .driver_info = RLT_MAC_BASE}, /* Microsoft XBox One Wireless Adapter */
-	{USB_DEVICE(0x0E8D, 0x7612), .driver_info = RLT_MAC_BASE},
+	{USB_DEVICE(0x0E8D, 0x7612), .driver_info = RLT_MAC_BASE}, /* EDUP EP-AC1601 (MediaTek) */
+	{USB_DEVICE(0x045e, 0x02e6), .driver_info = RLT_MAC_BASE}, /* Microsoft Xbox one Wireless Adapter for Windows */
+	{USB_DEVICE(0x0846, 0x9053), .driver_info = RLT_MAC_BASE}, /* Netgear, Inc. AC1200 WiFi USB 3.0 Adapter */
+	{USB_DEVICE(0x0846, 0x9014), .driver_info = RLT_MAC_BASE}, /* NetGear, Inc. N600 Wireless Dual Band WNDA3100v3 */
 	{USB_DEVICE_AND_INTERFACE_INFO(0x0E8D, 0x7632, 0xff, 0xff, 0xff), .driver_info = RLT_MAC_BASE},
 	{USB_DEVICE_AND_INTERFACE_INFO(0x0E8D, 0x7662, 0xff, 0xff, 0xff), .driver_info = RLT_MAC_BASE},
 #endif
