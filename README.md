@@ -61,7 +61,7 @@ iw dev wlan0 scan
 
 ### Acknowledgements
 - MediaTek for release of their source code under a GPL licence
-- Eugene Rusalev for the significant rewrite to add support for 4.x series kernels.
+- Juro Bystricky and Eugene Rusalev for the significant rewrite to add support for 4.x series kernels.
 
 ### Licence
 
