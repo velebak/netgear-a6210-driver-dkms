@@ -17,6 +17,7 @@ The following devices are known to use wireless chipsets supported by this drive
 - Netgear A6210 WiFi USB 3.0 Adapter (802.11ac Dual Band with High Gain Antenna)
 - Asus USB-AC55 AC1300 Dual-band USB Wireless Dongle
 - Asus USB-N53 USB Dual Band Wireless Dongle
+- Edimax AC1200 EW-7722UAC Wireless Dual Band USB 3.0 Adapter
 - EDUP 802.11 AC 1200M 2.4G/5.8G Dual Band USB 3.0 Wireless Wifi Adapter
 - Microsoft XBox One Wireless Adapter
 
