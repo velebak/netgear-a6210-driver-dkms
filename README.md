@@ -15,6 +15,7 @@ MediaTek/Ralink
 ### Supported Devices
 The following devices are known to use wireless chipsets supported by this driver but there are probably many others. 
 - Netgear A6210 WiFi USB 3.0 Adapter (802.11ac Dual Band with High Gain Antenna)
+- Netgear RangeMax Dual Band Wireless-N USB 2.0 Adapter WNDA3100 (Revision 3)
 - Asus USB-AC55 AC1300 Dual-band USB Wireless Dongle
 - Asus USB-N53 USB Dual Band Wireless Dongle
 - Edimax AC1200 EW-7722UAC Wireless Dual Band USB 3.0 Adapter
