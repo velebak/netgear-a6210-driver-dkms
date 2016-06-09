@@ -1,6 +1,6 @@
 ## Introduction
 
-This is a linux kernel driver for the Netgear A6210 wireless adapter and other wireless adapters based on the Ralink/Mediatek MT766U, MT7632U and MT7612 chipsets. The source code is based on the original MediaTek source code(1) (originally written for the 3.x series kernel in July 2014) which has been updated by Eugene Rusalev (2) (and others) to support more modern kernel versions e.g. 4.1.x
+This is a linux kernel driver for the Netgear A6210 wireless adapter and other wireless adapters based on the Ralink/Mediatek MT766U, MT7632U and MT7612 chipsets. The source code is based on the original MediaTek source code(1) (originally written for the 3.x series kernel in July 2014) which has been updated by Eugene Rusalev (2) (and others) to support more modern kernel versions e.g. 4.1.x.
 
 ### Current Status
 
@@ -87,3 +87,7 @@ With contributions from;
 [1] http://www.mediatek.com/en/downloads1/downloads/mt7612u/
 
 [2] https://github.com/jurobystricky/
+
+## Notes
+
+The original MediaTek driver source code was distributed as MT7612U_DPO_LinuxSTA_3.0.0.1_20140718.tar.bz2
