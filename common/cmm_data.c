@@ -1081,8 +1081,8 @@ static UCHAR TxPktClassification(RTMP_ADAPTER *pAd, PNDIS_PACKET  pPacket, TX_BL
 
 	/* Currently, our fragment only support when a unicast packet send as NOT-ARALINK, NOT-AMSDU and NOT-AMPDU.*/
 
-	if ((RTMP_GET_PACKET_FRAGMENTS(pPacket) > 1)
-		 && (TxFrameType == TX_LEGACY_FRAME)
+	if (((RTMP_GET_PACKET_FRAGMENTS(pPacket) > 1)
+		 && (TxFrameType == TX_LEGACY_FRAME))
 #ifdef VHT_TXBF_SUPPORT
 		 || (TxFrameType == (TX_LEGACY_FRAME | TX_NDPA_FRAME))
 #endif
