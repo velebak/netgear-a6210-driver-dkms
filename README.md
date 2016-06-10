@@ -2,16 +2,6 @@
 
 This is a linux kernel driver for the Netgear A6210 wireless adapter and other wireless adapters based on the Ralink/Mediatek MT766U, MT7632U and MT7612 chipsets. The source code is based on the original MediaTek source code(1) (originally written for the 3.x series kernel in July 2014) which has been updated by Juro Bystricky, Eugene Rusalev and others to support more modern kernel versions e.g. 4.1.x.
 
-### Current Status
-
-The driver is a work in progress, despite being mostly fully functional (including AP mode) there have been reports of issues with certain combinations of devices and the linux distribution used. See known issues for more information.
-
-### Supported Chipsets
-MediaTek/Ralink
-- MT766U
-- MT7632U
-- MT7612
-
 ### Supported Devices
 The following devices are known to use wireless chipsets supported by this driver but there are probably many others. 
 - Netgear A6210 WiFi USB 3.0 Adapter (802.11ac Dual Band with High Gain Antenna)
@@ -23,6 +13,16 @@ The following devices are known to use wireless chipsets supported by this drive
 - Microsoft XBox One Wireless Adapter
 
 If you are aware of any other devices not listed here that use any of the supported chipsets please send us a copy of its USB ID so that we can add support directly into the driver.
+
+### Supported Chipsets
+MediaTek/Ralink
+- MT766U
+- MT7632U
+- MT7612
+
+### Current Status
+
+The driver is a work in progress, despite being mostly fully functional (including AP mode) there have been reports of issues with certain combinations of devices and the linux distribution used. See known issues for more information.
 
 ### Supported Linux Kernel Versions
 
