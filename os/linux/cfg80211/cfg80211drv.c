@@ -273,8 +273,8 @@ int CFG80211DRV_IoctlHandle(void *pAdSrc, int cmd, void *pData, ULONG Data)
 			DBGPRINT(RT_DEBUG_ERROR,
 					("%s: CMD_RTPRIV_IOCTL_80211_NETDEV_EVENT\n",
 					__FUNCTION__));
-			if (!pAd) {
-				DBGPRINT(RT_DEBUG_ERROR, ("%s: pAd is null\n", __FUNCTION__));	
+			if (WARN_ON(!pAd)) {
+				DBGPRINT(RT_DEBUG_ERROR, ("%s: pAd is null pointer\n", __FUNCTION__));	
 			}
 			else if (pAd->cfg80211_ctrl.FlgCfg80211Scanning == TRUE) {
 				DBGPRINT(RT_DEBUG_WARN,
