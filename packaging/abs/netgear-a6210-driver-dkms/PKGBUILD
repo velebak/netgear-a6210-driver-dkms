@@ -5,7 +5,7 @@ pkgrel=1
 pkgdesc="Kernel driver for the mt766u, mt7632u and mt7612u family of wireless chipsets (DKMS)"
 arch=('x86' 'x86_64') 
 url="https://github.com/worralph/netgear-a6210-driver-dkms"
-_giturl="git+https://github.com/worralph/netgear-a6210-driver-dkms"
+_giturl="git+https://github.com/worralph/netgear-a6210-driver-dkms#branch=unstable"
 license=('custom')
 depends=('dkms')
 conflicts=("${_pkgbase}")
