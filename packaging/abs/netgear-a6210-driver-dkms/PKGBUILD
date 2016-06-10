@@ -1,6 +1,6 @@
 _pkgbase="netgear-a6210-driver"
 pkgname="netgear-a6210-driver-dkms"
-pkgver=r482.b49b8b0
+pkgver=r483.b35d1e8
 pkgrel=1
 pkgdesc="Kernel driver for the mt766u, mt7632u and mt7612u family of wireless chipsets (DKMS)"
 arch=('x86' 'x86_64') 
@@ -23,7 +23,7 @@ source+=("dkms.conf")
 source+=("netgear-a6210-driver-dkms.install")
 md5sums=('SKIP'
          '4877a958c2162c8352e430e01e055607'
-         '228d651cd2a88cf4d0da0d833873abba'
+         'ecd5c16b0a0f91c933f64ae004f6c7f5'
          '39ab29a603e54d8e38fb50841707aacf')
 
 pkgver() {
