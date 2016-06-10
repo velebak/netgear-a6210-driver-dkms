@@ -1083,7 +1083,7 @@ static UCHAR TxPktClassification(RTMP_ADAPTER *pAd, PNDIS_PACKET  pPacket, TX_BL
         if (!(RTMP_GET_PACKET_FRAGMENTS(pPacket) > 1))
         	goto out;
 
-#if defined(VHT_TXBF_SUPPORT) && (DOT11_N_SUPPORT)
+#if defined(VHT_TXBF_SUPPORT) && defined(DOT11_N_SUPPORT)
 	if ((TxFrameType == (TX_LEGACY_FRAME | TX_NDPA_FRAME)) 
 	    && ((pMacEntry->TXBAbitmap & (1<<(RTMP_GET_PACKET_UP(pPacket)))) == 0)) {
 		TxFrameType = TX_FRAG_FRAME;
