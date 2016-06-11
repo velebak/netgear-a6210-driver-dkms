@@ -62,10 +62,10 @@ static int rt2870_probe(struct usb_interface *intf, struct usb_device *usb_dev,
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,32)
 	atomic_set(&intf->pm_usage_cnt, 1);
-	printk(" rt2870_probe ====> pm_usage_cnt %d \n", atomic_read(&intf->pm_usage_cnt));
+	DBGPRINT(RT_DEBUG_TRACE, (" rt2870_probe ====> pm_usage_cnt %d \n", atomic_read(&intf->pm_usage_cnt)));
 #else
 	intf->pm_usage_cnt = 1;
-	printk(" rt2870_probe ====> pm_usage_cnt %d \n", intf->pm_usage_cnt);
+	DBGPRINT(RT_DEBUG_TRACE, (" rt2870_probe ====> pm_usage_cnt %d \n", intf->pm_usage_cnt));
 #endif
 
 #endif /* USB_SUPPORT_SELECTIVE_SUSPEND */
@@ -73,7 +73,7 @@ static int rt2870_probe(struct usb_interface *intf, struct usb_device *usb_dev,
 
 	handle = os_alloc_mem(sizeof(struct os_cookie));
 	if (handle == NULL) {
-		printk("rt2870_probe(): Allocate memory for os handle failed!\n");
+		DBGPRINT(RT_DEBUG_WARN, ("rt2870_probe(): Allocate memory for os handle failed!\n"));
 		return -ENOMEM;
 	}
 	memset(handle, 0, sizeof(struct os_cookie));
@@ -203,7 +203,7 @@ static void rt2870_disconnect(struct usb_device *dev, void *pAd)
 			__FUNCTION__,dev->bus->bus_name, dev->devpath));
 	if (!pAd) {
 		usb_put_dev(dev);
-		printk("rtusb_disconnect: pAd == NULL!\n");
+		DBGPRINT(RT_DEBUG_TRACE, ("rtusb_disconnect: pAd == NULL!\n"));
 		return;
 	}
 /*	RTMP_SET_FLAG(pAd, fRTMP_ADAPTER_NIC_NOT_EXIST); */
@@ -398,7 +398,7 @@ static BOOLEAN USBDevConfigInit(struct usb_device *dev, struct usb_interface *in
 	}
 
 	if (!(pConfig->BulkInEpAddr && pConfig->BulkOutEpAddr[0])) {
-		printk("%s: Could not find both bulk-in and bulk-out endpoints\n", __FUNCTION__);
+		DBGPRINT(RT_DEBUG_ERROR, ("%s: Could not find both bulk-in and bulk-out endpoints\n", __FUNCTION__));
 		return FALSE;
 	}
 
@@ -452,13 +452,13 @@ static void rtusb_disconnect(struct usb_interface *intf)
 
 #ifdef CONFIG_PM
 #ifdef USB_SUPPORT_SELECTIVE_SUSPEND
-	printk("rtusb_disconnect usb_autopm_put_interface \n");
+	DBGPRINT(RT_DEBUG_TRACE, ("rtusb_disconnect usb_autopm_put_interface \n"));
 	usb_autopm_put_interface(intf);
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,32)
-	printk("%s() => pm_usage_cnt %d \n", __FUNCTION__,
-			atomic_read(&intf->pm_usage_cnt));
+	DBGPRINT(RT_DEBUG_TRACE, ("%s() => pm_usage_cnt %d \n", __FUNCTION__,
+			atomic_read(&intf->pm_usage_cnt)));
 #else
-	printk("%s() => pm_usage_cnt %d \n", __FUNCTION__, intf->pm_usage_cnt);
+	 DBGPRINT(RT_DEBUG_TRACE, ("%s() => pm_usage_cnt %d \n", __FUNCTION__, intf->pm_usage_cnt));
 #endif
 #endif /* USB_SUPPORT_SELECTIVE_SUSPEND */
 #endif /* CONFIG_PM */
@@ -495,16 +495,16 @@ int __init rtusb_init(void)
 #ifdef DBG
 	struct dentry *tmp;
 
-	printk("rtusb init %s --->\n", RTMP_DRV_NAME);
+	DBGPRINT(RT_DEBUG_TRACE, ("rtusb init %s --->\n", RTMP_DRV_NAME));
 	dbgfs_dir = debugfs_create_dir(RTMP_DRV_NAME, 0);
 	if (!dbgfs_dir) {
-		printk(KERN_ALERT "debugfs_create_dir failed\n");
+		DBGPRINT(RT_DEBUG_WARN, ("debugfs_create_dir failed\n"));
 	}
 
 	tmp = debugfs_create_u32("RTDebugLevel", S_IWUSR | S_IRUGO, dbgfs_dir,
 			&RTDebugLevel);
 	if (!tmp) {
-		printk(KERN_ALERT "debugfs_create_u32 failed\n");
+		DBGPRINT(RT_DEBUG_WARN, ("debugfs_create_u32 failed\n"));
 	}
 #endif
 	return usb_register(&rtusb_driver);
@@ -517,7 +517,7 @@ void __exit rtusb_exit(void)
 #ifdef DBG
 	debugfs_remove_recursive(dbgfs_dir);
 #endif
-	printk("<--- rtusb exit\n");
+	DBGPRINT(RT_DEBUG_TRACE, ("<--- rtusb exit\n"));
 }
 
 #ifndef MULTI_INF_SUPPORT

@@ -103,7 +103,7 @@ NDIS_STATUS RTMPAllocAdapterBlock(void *handle, void **ppAdapter)
 #endif
 		}
 		pAd->BeaconBuf = pBeaconBuf;
-		DBGPRINT(RT_DEBUG_OFF, ("\n=== pAd = %p, size = %lu ===\n\n",
+		DBGPRINT(RT_DEBUG_OFF, ("=== pAd = %p, size = %lu ===\n",
 				pAd, sizeof(RTMP_ADAPTER)));
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 15, 0)
 	#pragma GCC diagnostic push
@@ -317,8 +317,8 @@ void NICReadEEPROMParameters(RTMP_ADAPTER *pAd, PSTRING mac_addr)
 #if defined(BB_SOC)&&!defined(NEW_MBSSID_MODE)
 		BBUPrepareMAC(pAd, pAd->CurrentAddress);
 		COPY_MAC_ADDR(pAd->PermanentAddress, pAd->CurrentAddress);
-		printk("now bb MainSsid mac %02x:%02x:%02x:%02x:%02x:%02x\n",
-				PRINT_MAC(pAd->CurrentAddress));
+		DBGPRINT(RT_DEBUG_TRACE, ("now bb MainSsid mac %02x:%02x:%02x:%02x:%02x:%02x\n",
+				PRINT_MAC(pAd->CurrentAddress)));
 #endif
 	} else if (mac_addr && strlen((PSTRING)mac_addr) == 17 &&
 		(strcmp(mac_addr, "00:00:00:00:00:00") != 0)) {
