@@ -17,31 +17,29 @@
 
 #include "../../include/os/rt_debug.h"
 
-void rt_dprintk(const char * format, va_list ap)
-{
-    printk(KERN_DEBUG KBUILD_MODNAME ": ");
-    vprintk(format, ap);
-}
+#define RT_ERROR_MSG 0
+#define RT_DEBUG_MSG 1
 
-void rt_eprintk(const char * format, va_list ap)
+void rt_dprintk(int type, const char * format, ...)
 {
-    printk(KERN_ERR KBUILD_MODNAME ": ");
-    vprintk(format, ap);
+	va_list ap;
+
+	va_start(ap, format);
+	if (type == RT_DEBUG_MSG)
+		printk(KERN_DEBUG KBUILD_MODNAME ": ");
+	else
+		printk(KERN_ERR KBUILD_MODNAME ": ");
+	vprintk(format, ap);
+	va_end(ap);
 }
 
 void rt_fmt_msg(const char * format, ...)
 {
-    va_list ap;
-    va_start(ap, format);
-    rt_dprintk(format, ap);
-    va_end(ap);
+    rt_dprintk(RT_DEBUG_MSG, format);
 }
 
 void rt_fmt_emsg(const char * format, ...)
 {
-    va_list ap;
-    va_start(ap, format);
-    rt_eprintk(format, ap);
-    va_end(ap);
+    rt_dprintk(RT_ERROR_MSG, format);
 }
 
