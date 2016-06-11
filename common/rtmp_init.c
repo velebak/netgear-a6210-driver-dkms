@@ -107,10 +107,9 @@ NDIS_STATUS RTMPAllocAdapterBlock(void *handle, void **ppAdapter)
 				pAd, sizeof(RTMP_ADAPTER)));
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 15, 0)
 	#pragma GCC diagnostic push
-	#pragma GCC diagnostic ignored "-Wdate-time"
 #ifdef CONFIG_STA_SUPPORT
-		DBGPRINT(RT_DEBUG_OFF, ("driver version: %s (%s %s) .\n",
-				STA_DRIVER_VERSION, __DATE__, __TIME__));
+		DBGPRINT(RT_DEBUG_OFF, ("Driver Version: %s\n",
+				STA_DRIVER_VERSION));
 #endif
 #endif
 		if (RtmpOsStatsAlloc(&pAd->stats, &pAd->iw_stats) == FALSE) {
