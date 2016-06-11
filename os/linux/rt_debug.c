@@ -35,11 +35,11 @@ void rt_dprintk(int type, const char * format, ...)
 
 void rt_fmt_msg(const char * format, ...)
 {
-    rt_dprintk(RT_DEBUG_MSG, format);
+    rt_dprintk(RT_DEBUG_MSG, format, ...);
 }
 
 void rt_fmt_emsg(const char * format, ...)
 {
-    rt_dprintk(RT_ERROR_MSG, format);
+    rt_dprintk(RT_ERROR_MSG, format, ...);
 }
 
