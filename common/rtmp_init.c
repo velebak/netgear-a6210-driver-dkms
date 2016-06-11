@@ -103,7 +103,7 @@ NDIS_STATUS RTMPAllocAdapterBlock(void *handle, void **ppAdapter)
 #endif
 		}
 		pAd->BeaconBuf = pBeaconBuf;
-		DBGPRINT(RT_DEBUG_OFF, ("=== pAd = %p, size = %lu ===\n",
+		DBGPRINT(RT_DEBUG_OFF, ("Wireless adapter at address (%p),  size (%zu)\n",
 				pAd, sizeof(RTMP_ADAPTER)));
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 15, 0)
 	#pragma GCC diagnostic push
