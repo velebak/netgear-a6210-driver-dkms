@@ -335,7 +335,7 @@ BOOLEAN CFG80211_SupBandInit(void *pCB, CFG80211_BAND *pDriverBandInfo,
 #endif
 		if (IsRadarChannel(Cfg80211_Chan[IdLoop])) {
 			pChannels[IdLoop].flags = 0;
-			printk("====> Radar Channel %d\n", Cfg80211_Chan[IdLoop]);
+			DBGPRINT(RT_DEBUG_TRACE,("====> Radar Channel %d\n", Cfg80211_Chan[IdLoop]));
 			pChannels[IdLoop].flags |= (IEEE80211_CHAN_RADAR | IEEE80211_CHAN_PASSIVE_SCAN);
 		}
 /*		CFG_TODO:
@@ -921,7 +921,7 @@ void CFG80211OS_P2pClientConnectResultInform(PNET_DEV pNetDev, UCHAR *pBSSID,
 		return;
 
 	if (FlgIsSuccess) {
-		printk("APCLI: ReqIeLen %d, RspIeLen, %d\n", ReqIeLen, RspIeLen);
+		DBGPRINT(RT_DEBUG_TRACE,("APCLI: ReqIeLen %d, RspIeLen, %d\n", ReqIeLen, RspIeLen));
 		hex_dump("APCLI Req:", pReqIe, ReqIeLen);
 		hex_dump("APCLI Rsp:", pRspIe, RspIeLen);
 		cfg80211_connect_result(pNetDev,
