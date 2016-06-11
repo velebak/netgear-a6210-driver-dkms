@@ -177,9 +177,9 @@ void *os_alloc_mem(size_t size)
 NDIS_STATUS os_alloc_mem_suspend(void *pReserved, UCHAR **mem, ULONG size)
 {
 	*mem = (PUCHAR) kmalloc(size, GFP_KERNEL);
-	if (*mem) {
+	if (*mem)
 		return NDIS_STATUS_SUCCESS;
-	} else
+	else
 		return NDIS_STATUS_FAILURE;
 }
 
@@ -283,7 +283,7 @@ NDIS_STATUS RTMPAllocateNdisPacket(void *pReserved, PNDIS_PACKET *ppPacket,
 	if (pPacket == NULL) {
 		*ppPacket = NULL;
 #ifdef DEBUG
-		printk(KERN_ERR "RTMPAllocateNdisPacket Fail\n\n");
+		DBGPRINT(RT_DEBUG_ERROR, "RTMPAllocateNdisPacket Fail\n\n"));
 #endif
 		return NDIS_STATUS_FAILURE;
 	}
@@ -593,15 +593,15 @@ void hex_dump(char *str, UCHAR *pSrcBufVA, UINT SrcBufLen)
 		return;
 
 	pt = pSrcBufVA;
-	printk("%s: %p, len = %d\n", str, pSrcBufVA, SrcBufLen);
+	DBGPRINT(RT_DEBUG_TRACE, ("%s: %p, len = %d\n", str, pSrcBufVA, SrcBufLen));
 	for (x = 0; x < SrcBufLen; x++) {
 		if (x % 16 == 0)
-			printk("0x%04x : ", x);
-		printk("%02x ", ((unsigned char)pt[x]));
+			DBGPRINT(RT_DEBUG_TRACE, ("0x%04x : ", x));
+		DBGPRINT(RT_DEBUG_TRACE, ("%02x ", ((unsigned char)pt[x])));
 		if (x % 16 == 15)
-			printk("\n");
+			DBGPRINT(RT_DEBUG_TRACE, ("\n"));
 	}
-	printk("\n");
+	DBGPRINT(RT_DEBUG_TRACE, ("\n"));
 #endif
 }
 
@@ -768,10 +768,9 @@ static inline NDIS_STATUS __RtmpOSTaskKill(OS_TASK *pTask)
 		mb();
 		ret = KILL_THREAD_PID(pTask->taskPID, SIGTERM, 1);
 		if (ret) {
-			printk(KERN_WARNING
-					"kill task(%s) with pid(%d) failed(retVal=%d)!\n",
+			DBGPRINT(RT_DEBUG_WARN, ("kill task(%s) with pid(%d) failed(retVal=%d)!\n",
 					pTask->taskName, GET_PID_NUMBER(pTask->taskPID),
-					ret);
+					ret)));
 		} else {
 			wait_for_completion(&pTask->taskComplete);
 			pTask->taskPID = THREAD_PID_INIT_VALUE;
@@ -926,7 +925,7 @@ static UINT32 RtmpOSWirelessEventTranslate(IN UINT32 eventType)
 		break;
 
 	default:
-		printk("Unknown event: 0x%x\n", eventType);
+		DBGPRINT(RT_DEBUG_TRACE, ("Unknown event: 0x%x\n", eventType));
 		break;
 	}
 
@@ -1319,8 +1318,8 @@ static void RtmpOSNetDeviceRefPut(PNET_DEV pNetDev)
 static int RtmpOSNetDevDestroy(void *pReserved, PNET_DEV pNetDev)
 {
 	/* TODO: Need to fix this */
-	printk("WARNING: This function(%s) not implement yet!!!\n",
-			__FUNCTION__);
+	DBGPRINT(RT_DEBUG_TRACE, ("WARNING: This function(%s) not implement yet!!!\n",
+			__FUNCTION__));
 	return 0;
 }
 #endif
@@ -1355,8 +1354,8 @@ static struct ethtool_ops RALINK_Ethtool_Ops = {
 
 #define ASSERT_RTNL_UNLOCKED() do { \
        if (unlikely(rtnl_is_locked())) { \
-               printk(KERN_ERR "RTNL: assertion failed at %s (%d)\n", \
-                       __FILE__,  __LINE__); \
+               DBGPRINT(RT_DEBUG_ERROR, ("RTNL: assertion failed at %s (%d)\n", \
+                       __FILE__,  __LINE__)); \
                 dump_stack(); \
         } \
 } while(0)
@@ -1618,7 +1617,7 @@ void RtmpDrvAllMacPrint(void *pReserved, UINT32 *pBufMac, UINT32 AddrStart,
 				/* write data to file */
 				file_w->f_op->write(file_w, msg, strlen(msg), &file_w->f_pos);
 
-				printk("%s", msg);
+				DBGPRINT(RT_DEBUG_TRACE, ("%s", msg));
 				macAddr += AddrStep;
 			}
 			sprintf(msg, "\nDump all MAC values to %s\n", fileName);
@@ -1665,7 +1664,7 @@ void RtmpDrvAllE2PPrint(void *pReserved, USHORT *pMacContent, UINT32 AddrEnd,
 				/* write data to file */
 				file_w->f_op->write(file_w, msg, strlen(msg), &file_w->f_pos);
 
-				printk("%s", msg);
+				DBGPRINT(RT_DEBUG_TRACE, ("%s", msg));
 				eepAddr += AddrStep;
 				pMacContent += (AddrStep >> 1);
 			}
