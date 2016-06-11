@@ -323,9 +323,10 @@ endif
 
 ifeq ($(OSABL),NO)
 $(MOD_NAME)-objs += \
-        ../../common/rt_os_util.o\
-        ../../os/linux/rt_linux.o\
-        ../../os/linux/rt_main_dev.o
+	../../common/rt_os_util.o\
+	../../os/linux/rt_linux.o\
+	../../os/linux/rt_main_dev.o\
+	../../os/linux/rt_debug.o
 
 ifeq ($(HAS_SNIFFER_SUPPORT),y)
 $(MOD_NAME)-objs += \
@@ -422,7 +423,8 @@ $(MOD_NAME)-objs += \
 	../../common/rt_os_util.o\
 	../../os/linux/sta_ioctl.o\
 	../../os/linux/rt_linux.o\
-	../../os/linux/rt_main_dev.o
+	../../os/linux/rt_main_dev.o\
+	../../os/linux/rt_debug.o
 
 ifeq ($(HAS_SNIFFER_SUPPORT),y)
 $(MOD_NAME)-objs += \

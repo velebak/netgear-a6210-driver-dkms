@@ -89,6 +89,8 @@
 #endif
 #endif
 
+#include "rt_debug.h"
+
 typedef struct urb *purbb_t;
 
 
@@ -584,7 +586,7 @@ do {						\
 	{                               \
 		if ((RTDebugFunc == 0) || \
 		((RTDebugFunc != 0) && (((__fLevel & RTDebugFunc)!= 0) || (__gLevel <= RT_DEBUG_ERROR))))\
-		printk Fmt;               \
+		rt_fmt_msg Fmt;               \
 	}                               \
 }while(0)
 
@@ -592,8 +594,7 @@ do {						\
 
 #define DBGPRINT_ERR(Fmt)        \
 {                                \
-    printk("ERROR mt766u_sta:"); \
-    printk Fmt;                  \
+    rt_fmt_emsg Fmt;             \
 }
 
 #else
@@ -608,7 +609,7 @@ do {						\
 {											\
 	if (!(x))									\
 	{										\
-		printk(KERN_WARNING __FILE__ ":%d assert " #x "failed\n", __LINE__); 	\
+		printk(KERN_WARNING KBUILD_MODNAME ": " __FILE__ ":%d assert " #x "failed\n", __LINE__); 	\
 	}										\
 }
 #else
