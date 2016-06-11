@@ -21,14 +21,12 @@ void rt_dprintk(const char * format, va_list ap)
 {
     printk(KERN_DEBUG KBUILD_MODNAME ": ");
     vprintk(format, ap);
-    printk("\n");
 }
 
 void rt_eprintk(const char * format, va_list ap)
 {
     printk(KERN_ERR KBUILD_MODNAME ": ");
     vprintk(format, ap);
-    printk("\n");
 }
 
 void rt_fmt_msg(const char * format, ...)
