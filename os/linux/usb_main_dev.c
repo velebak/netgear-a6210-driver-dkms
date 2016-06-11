@@ -529,7 +529,10 @@ module_exit(rtusb_exit);
 /* *** If you have a solution for the bug in current version of driver, please mail to me. */
 /* Otherwise post to forum in ralinktech's web site(www.ralinktech.com) and let all users help you. *** */
 MODULE_AUTHOR("Ralink");
-MODULE_DESCRIPTION("Ralink Wireless Lan Linux Driver");
+MODULE_AUTHOR("MediaTek");
+MODULE_AUTHOR("Juro Bystricky <jurobystricky AT hotmail.com>");
+MODULE_AUTHOR("Philip Worrall <worralph AT gmail.com");
+MODULE_DESCRIPTION("Kernel driver for the Ralink/MediaTek MT766U, MT7632U and MT7612 wireless chipsets");
 MODULE_LICENSE("GPL");
 
 #ifdef CONFIG_STA_SUPPORT
