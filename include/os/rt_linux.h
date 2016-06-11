@@ -590,7 +590,7 @@ do {						\
 	}                               \
 }while(0)
 
-#define DBGPRINT(Level, Fmt) rt_fmt_msg Fmt
+#define DBGPRINT(Level, Fmt) DBGPRINT_RAW(Level, Fmt)
 
 #define DBGPRINT_ERR(Fmt)        \
 {                                \
